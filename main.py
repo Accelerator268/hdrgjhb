@@ -1,3 +1,3 @@
-string = "no clouds here to spy on pets"
-new_string = string[0::5]
-print(new_string[::-1])
+mail = input()
+if '@' in mail:
+  print(mail[:mail.find('@')])
