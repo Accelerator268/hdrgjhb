@@ -24,7 +24,12 @@ while ([6, 6] not in domino_snake) and ([5, 5] not in domino_snake):
     elif [5, 5] in player_pieces:
         domino_snake.append([5, 5])
         player_pieces.remove([5, 5])
+if len(player_pieces) == 6:
+    status = 'player'
+else:
+    status = 'computer'
 print('{} {piece}'.format('Stock pieces:', piece=stock_pieces))
 print('{} {piece}'.format('Player pieces:', piece=player_pieces))
 print('{} {piece}'.format('Computer pieces:', piece=computer_pieces))
 print('{} {domino}'.format('Domino snake:', domino=domino_snake))
+print('{} {status}'.format('Status:', status=status))
