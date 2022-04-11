@@ -1,2 +1,2 @@
-pi = '3.141592653589793'
-print(pi[:7])
+number, decimal = float(input()), int(input())
+print(f'%.{decimal}f' % number)
