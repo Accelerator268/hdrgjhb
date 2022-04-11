@@ -1,2 +1,3 @@
-sequence = 'kjsf'
-print(sequence[0:len(sequence):1])
+string = "no clouds here to spy on pets"
+new_string = string[0::5]
+print(new_string[::-1])
