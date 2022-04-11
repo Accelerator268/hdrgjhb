@@ -1,1 +1,3 @@
-print('word has', len(input()), 'letters')
+input().format
+f-strings
+%
