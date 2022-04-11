@@ -1,2 +1,1 @@
-movie, director, year = input(), input(), input()
-print(movie, ' (dir. ', director, ') came out in ', year, sep = '')
+print('word has', len(input()), 'letters')
