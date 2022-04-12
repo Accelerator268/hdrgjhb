@@ -1,6 +1,5 @@
-wtT = input().split()
-w, t, T = int(wtT[0]), int(wtT[1]), int(wtT[2])
-if T%t != 0:
-  print((T//t + 1)*w)
+n = int(input())
+if n % 2 == 0:
+  print(n//2)
 else:
-  print(T//t * w)
+  print(n//2+1)
