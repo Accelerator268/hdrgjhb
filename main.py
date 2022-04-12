@@ -1,15 +1,35 @@
-import random
+# # map
 
-#для сдвига берем в расчет только положительные числа
-move = random.randint(1, 10)
-print(move)
-a_sorted = [random.randint(0, 10) for _ in range(10)]
-a_sorted.sort()
-a_new = []
-if move > len(a_sorted):
-    move %= len(a_sorted)
-for i in range(len(a_sorted)):
-    a_new.append(a_sorted[i - move])
-print('{} {a_sorted}'.format('отсортированный массив:', a_sorted = a_sorted))
-print('{} {a_new}'.format('сдвинутый массив:', a_new = a_new))
-print('{} {maximum}'.format('максимум массива:', maximum = a_new[move-1]))
+  
+
+nums = [n for n in range(10)]
+# # # double_n = [n * 2 for n in nums]
+# # print(nums)
+# # # print(double_n)
+
+# # def doubler(x):
+# #   return x * 2
+
+# # double_numbers = list(map(doubler, nums))
+# # print(double_numbers)
+
+# # a, b = map(int, (input(), input()))
+# # print(a, b)
+
+
+# double_numbers = list(map(lambda x: x * 2, nums))
+
+# print(double_numbers)
+
+
+# x_list = [1, 2, 4]
+# y_list = [4, 6, 8]
+# z_list = [9, 10, 10]
+
+# res = list(map(lambda x, y, z: x + y + z, x_list, y_list, z_list))
+# print(res)
+
+#filter
+
+odd_numbers = list(filter(lambda x: x % 2, nums))
+print(odd_numbers)
