@@ -1,32 +1,29 @@
-import random
+from random import randint, shuffle
 
 
-move = random.randint(1, 10)
-a_sorted = [random.randint(0, 10) for _ in range(10)]
-a_sorted.sort()
-a_new = []
-if move > len(a_sorted):
-    move %= len(a_sorted)
-for i in range(len(a_sorted)):
-    a_new.append(a_sorted[i - move])
-print('{} {a_sorted}'.format('отсортированный массив:', a_sorted = a_sorted))
-print('{} {a_new}'.format('сдвинутый массив:', a_new = a_new))
+stock = [[i, j] for i in range(7) for j in range(i, 7)]
+doubles = stock[:4:-2]
+on_hands = 7
 
-if a_sorted == a_new:
-    print(a_sorted[-1])
-else:
-    while len(a_new)>2:
-        if len(a_new)%2==0:
-            if a_new[len(a_new)//2-1] <= a_new[-1]:
-                a_new = a_new[:(len(a_new) // 2)]
-            elif a_new[len(a_new)//2-1] > a_new[-1]:
-                a_new = a_new[(len(a_new) // 2-1):]
-        elif len(a_new)%2==1:
-            if a_new[len(a_new)//2] <= a_new[-1]:
-                a_new = a_new[:(len(a_new) // 2+1)]
-            elif a_new[len(a_new)//2] > a_new[-1]:
-                a_new = a_new[(len(a_new) // 2):]
-    print('{} {max}'.format('Максимальный элемент массива:', max = max(a_new[0], a_new[1])))
+while not any([double in stock[:on_hands * 2] for double in doubles]):
+    shuffle(stock)
 
+for double in doubles:
+    if double in stock[:on_hands * 2]:
+        snake = stock.pop(stock.index(double))
+        break
 
-#создаем массив из 10 случайных чисел от 0 до 10. Сортируем изначальный массив в порядке возрастания. Сдвигаем массив вправо на случайное число. Если значение сдвига больше размера массива, то мы сокращаем этот сдвиг по аналогии с движением по кругу (проходим один круг, начинаем следующий и тд). Выводим два полученных массива. Если сдвиг был равен 0 (массив не изменился), то просто выводим последний элемент, как максимальный элемент. Если сдвиг не равен 0, то ищем максимум по принципу бинарного поиска. Берем средний элемент массива, сравниваем его с последним. Если последний элемент меньше, значит максимальный элемент - взятое число, либо число в промежутке от взятого и последнего элементов. Если последний элемент больше взятого, то максимальный элемент находится в промежутке между первым и взятым элементами. Продолжаем отбрасывать "половинки" до тех пор, пока не останется ассив из 2 чисел. После чего из него можно найти максимум сранив его элементы.
+computer, player = stock[:on_hands - 1], stock[on_hands - 1:on_hands*2-1]
+if randint(1, 2) == 2:
+    player, computer = computer, player
+
+stock = stock[on_hands * 2 - 1:]
+
+next_one = 'computer' if len(computer) > len(player) else 'player'
+
+print('   Stock pieces: {} \n\
+Computer pieces: {} \n\
+  Player pieces: {} \n\
+   Domino snake: [{}] \n\
+         Status: {}'.\
+format(stock, computer, player, snake, next_one))
