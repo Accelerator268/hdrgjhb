@@ -1,3 +1,4 @@
-names = ["Денис", "Дима", "ХЗ", "Дима", "Дима", "Леха", "ХЗ"]
-for count, names in enumerate(names):
-  print(names, count+1)
+s1 = list(input())
+s2 = list(input())
+for s1, s2 in zip(s1, s2):
+  print(s1, s2, sep = '', end = '')
