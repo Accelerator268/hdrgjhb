@@ -1,2 +1,3 @@
-s = [i for i in range(101)]
-print(s[5::5])
+nums = [0, 1, 1, 2, 3, 5, 8]
+print(nums[:])
+print(nums[0::1])
