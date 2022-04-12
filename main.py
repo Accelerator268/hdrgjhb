@@ -1,2 +1,3 @@
-distant = int(input())
-print(distant//13 + distant//17 - distant//221)
+nk = input().split()
+n, k = int(nk[0]), int(nk[1])
+print((k//n+1)*n - k)
