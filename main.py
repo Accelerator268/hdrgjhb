@@ -1,3 +1,6 @@
-nk = input().split()
-n, k = int(nk[0]), int(nk[1])
-print((k//n+1)*n - k)
+wtT = input().split()
+w, t, T = int(wtT[0]), int(wtT[1]), int(wtT[2])
+if T%t != 0:
+  print((T//t + 1)*w)
+else:
+  print(T//t * w)
