@@ -1,2 +1,2 @@
-n, k = map(int, (input(), input()))
-print((n+k)*(n-k))
+distant = int(input())
+print(distant//13 + distant//17 - distant//221)
