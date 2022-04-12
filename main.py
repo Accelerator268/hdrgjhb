@@ -1,35 +1,32 @@
-# # map
-
-  
-
-nums = [n for n in range(10)]
-# # # double_n = [n * 2 for n in nums]
-# # print(nums)
-# # # print(double_n)
-
-# # def doubler(x):
-# #   return x * 2
-
-# # double_numbers = list(map(doubler, nums))
-# # print(double_numbers)
-
-# # a, b = map(int, (input(), input()))
-# # print(a, b)
+import random
 
 
-# double_numbers = list(map(lambda x: x * 2, nums))
+move = random.randint(1, 10)
+a_sorted = [random.randint(0, 10) for _ in range(10)]
+a_sorted.sort()
+a_new = []
+if move > len(a_sorted):
+    move %= len(a_sorted)
+for i in range(len(a_sorted)):
+    a_new.append(a_sorted[i - move])
+print('{} {a_sorted}'.format('отсортированный массив:', a_sorted = a_sorted))
+print('{} {a_new}'.format('сдвинутый массив:', a_new = a_new))
 
-# print(double_numbers)
+if a_sorted == a_new:
+    print(a_sorted[-1])
+else:
+    while len(a_new)>2:
+        if len(a_new)%2==0:
+            if a_new[len(a_new)//2-1] <= a_new[-1]:
+                a_new = a_new[:(len(a_new) // 2)]
+            elif a_new[len(a_new)//2-1] > a_new[-1]:
+                a_new = a_new[(len(a_new) // 2-1):]
+        elif len(a_new)%2==1:
+            if a_new[len(a_new)//2] <= a_new[-1]:
+                a_new = a_new[:(len(a_new) // 2+1)]
+            elif a_new[len(a_new)//2] > a_new[-1]:
+                a_new = a_new[(len(a_new) // 2):]
+    print('{} {max}'.format('Максимальный элемент массива:', max = max(a_new[0], a_new[1])))
 
 
-# x_list = [1, 2, 4]
-# y_list = [4, 6, 8]
-# z_list = [9, 10, 10]
-
-# res = list(map(lambda x, y, z: x + y + z, x_list, y_list, z_list))
-# print(res)
-
-#filter
-
-odd_numbers = list(filter(lambda x: x % 2, nums))
-print(odd_numbers)
+#создаем массив из 10 случайных чисел от 0 до 10. Сортируем изначальный массив в порядке возрастания. Сдвигаем массив вправо на случайное число. Если значение сдвига больше размера массива, то мы сокращаем этот сдвиг по аналогии с движением по кругу (проходим один круг, начинаем следующий и тд). Выводим два полученных массива. Если сдвиг был равен 0 (массив не изменился), то просто выводим последний элемент, как максимальный элемент. Если сдвиг не равен 0, то ищем максимум по принципу бинарного поиска. Берем средний элемент массива, сравниваем его с последним. Если последний элемент меньше, значит максимальный элемент - взятое число, либо число в промежутке от взятого и последнего элементов. Если последний элемент больше взятого, то максимальный элемент находится в промежутке между первым и взятым элементами. Продолжаем отбрасывать "половинки" до тех пор, пока не останется ассив из 2 чисел. После чего из него можно найти максимум сранив его элементы.
