@@ -1,11 +1,7 @@
-#A. [11, 13, 15, 17]
-#B. [1, 2, 3, 4, 10, 11, 12, 13]
+def my_product(list1, list2):
+  return list(map(lambda x, y: x+y, list1, list2))
 
-x_list = [1, 2, 3, 4]
-y_list = [10, 11, 12, 13]
 
-result = list(map(lambda x, y: x + y, x_list, y_list))
-print(result)
-
-result = x_list + y_list
-print(result)
+list1 = [1, 2, 3, 4]
+list2 = [10, 11, 12, 13]
+print(my_product(list1, list2))
