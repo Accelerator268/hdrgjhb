@@ -1,5 +1,11 @@
-daily_temp_c = [20.5, 19, 15, 25, 27, 30, 31, 29, 26, 21,
-                19, 25, 27.5, 28, 26, 29.5, 31, 27.5, 26, 29,
-                18, 17.5, 17, 16.5, 19, 20, 25, 26.5, 27, 28,
-                20.5, 19, 25, 27.5, 28, 26, 15, 25, 27, 28]
-print(len(list(filter(lambda x: x*9/5+32>80, daily_temp_c))))
+#A. [11, 13, 15, 17]
+#B. [1, 2, 3, 4, 10, 11, 12, 13]
+
+x_list = [1, 2, 3, 4]
+y_list = [10, 11, 12, 13]
+
+result = list(map(lambda x, y: x + y, x_list, y_list))
+print(result)
+
+result = x_list + y_list
+print(result)
