@@ -1,49 +1,36 @@
-import random
+from random import randint, shuffle
 
 
-list = [[i, j] for i in range(7) for j in range(i, 7)]
-domino_snake = []
-while ([6, 6] not in domino_snake) and ([5, 5] not in domino_snake):
-    stock_pieces, computer_pieces, player_pieces = list.copy(), [], []
-    for _ in range(7):
-        n = random.choice(stock_pieces)
-        computer_pieces.append(n)
-        stock_pieces.remove(n)
-    for _ in range(7):
-        n = random.choice(stock_pieces)
-        player_pieces.append(n)
-        stock_pieces.remove(n)
-    if [6, 6] in computer_pieces:
-        domino_snake.append([6, 6])
-        computer_pieces.remove([6, 6])
-    elif [6, 6] in player_pieces:
-        domino_snake.append([6, 6])
-        player_pieces.remove([6, 6])
-    elif [5, 5] in computer_pieces:
-        domino_snake.append([5, 5])
-        computer_pieces.remove([5, 5])
-    elif [5, 5] in player_pieces:
-        domino_snake.append([5, 5])
-        player_pieces.remove([5, 5])
-if len(player_pieces) < len(computer_pieces):
-    status = 'player'
-else:
-    status = 'computer'
-print('{} {piece}'.format('Stock pieces:', piece=stock_pieces))
-print('{} {piece}'.format('Player pieces:', piece=player_pieces))
-print('{} {piece}'.format('Computer pieces:', piece=computer_pieces))
-print('{} {domino}'.format('Domino snake:', domino=domino_snake))
-print('{} {status}'.format('Status:', status=status))
+stock = [[i, j] for i in range(7) for j in range(i, 7)]
+doubles = stock[:4:-2]
+on_hands = 7
 
+while not any([double in stock[:on_hands * 2] for double in doubles]):
+    shuffle(stock)
 
-print('==============================================================================================================')
-print('Stock size: %s\nComputer pieces: %s\n\n\n%s\n' % (len(stock_pieces), len(computer_pieces), domino_snake))
-print('{}{}'.format('\n', 'Your pieces:'))
-for count, your_pieces in enumerate(player_pieces):
-    print(count, your_pieces, sep = ':')
-if status == 'computer':
-    print('\nStatus: Computer is about to make a move. Press "Enter" to continue\n')
-    status = 'player'
-elif status == 'player':
-    print('\nStatus: It\'s your turn to make a move. Enter your command.\n')
-    status = 'computer'
+for double in doubles:
+    if double in stock[:on_hands * 2]:
+        snake = stock.pop(stock.index(double))
+        break
+
+computer, player = stock[:on_hands - 1], stock[on_hands - 1:on_hands*2-1]
+if randint(1, 2) == 2:
+    player, computer = computer, player
+
+stock = stock[on_hands * 2 - 1:]
+
+next_one = 'computer' if len(computer) > len(player) else 'player'
+
+print('   Stock pieces: {} \n\
+Computer pieces: {} \n\
+  Player pieces: {} \n\
+   Domino snake: [{}] \n\
+         Status: {}'.\
+format(stock, computer, player, snake, next_one))
+
+print('=' * ord('F'))
+print('Stock size: %s\nComputer pieces: %s\n\n%s\n' % (len(stock), len(computer), snake))
+print('Your pieces:\n{}'.format('\n'.join(list(f'{i + 1}:{e}' for i, e in enumerate(list(map(str, ([pcs for pcs in player]))))))))
+print(''.join(chr(n) for n in [83, 116, 97, 116, 117, 115, 58]), end = ' ')
+print('Computer is about to make a move. Press Enter to continue...' if len(computer) > len(player) else \
+      'It\'s your turn to make a move. Enter your command.')
