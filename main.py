@@ -1,7 +1,6 @@
-def my_product(list1, list2):
-  return list(map(lambda x, y: x+y, list1, list2))
+def positive(list1):
+  return list(filter(lambda x: x>0, list1))
 
 
-list1 = [1, 2, 3, 4]
-list2 = [10, 11, 12, 13]
-print(my_product(list1, list2))
+list1 = [1, 2, 3, 4, -5, -9, 0]
+print(positive(list1))
