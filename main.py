@@ -1,7 +1,18 @@
-xyz1 = ', '.join(input().split())
-xyz2 = ', '.join(input().split())
-print('v1 = (', xyz1, ') & v2 = (', xyz2, ')', sep = '')
-xyz1 = xyz1.split(', ')
-xyz2 = xyz2.split(', ')
-for xy, xz in zip(xyz1, xyz2):
-  print(int(xy) + int(xz))
+from wrapper import get_time
+
+
+@get_time
+def binary(arr, low, high):
+  i = 1
+  while 55 < 66:
+    if arr[low] < arr[high]:
+      return arr[high], i
+    mid = (low + high) // 2
+    if arr[mid] > arr[mid + 1]:
+      return arr[mid], i
+    if arr[mid] > arr[high]:
+      low = mid + 1
+    elif arr[mid] < arr[high]:
+      high = mid - 1
+    i += 1
+  return None
