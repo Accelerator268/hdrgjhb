@@ -4,7 +4,7 @@ from wrapper import get_time
 @get_time
 def binary(arr, low, high):
   i = 1
-  while 55 < 66:
+  while True:
     if arr[low] < arr[high]:
       return arr[high], i
     mid = (low + high) // 2
