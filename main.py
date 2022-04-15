@@ -3,12 +3,14 @@ from time import perf_counter
 
 n = int(input())
 start = perf_counter()
-ending = []
-for i in range(1, int(round(n**0.5, 0)+1)):
-  if n % i == 0:
+i = 2
+while i**2 < n+1:
+  if n % i == 0 and n != i:
     print(i)
-    ending.append(n//i)
-ending.reverse()
-print(*ending, sep = '\n')
+  while n % i == 0:
+    n //= i
+  i += 1
+if n != 1:
+  print(n)
 end = perf_counter()
-print(end-start)
+print(end - start)
