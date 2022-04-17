@@ -1,1 +1,1 @@
-ArithmeticError
+c - will be always executed in the end
