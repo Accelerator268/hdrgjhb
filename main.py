@@ -119,7 +119,8 @@ while len(player_pieces) != 0 and len(computer_pieces) != 0 and status != 'draw'
                         domino_snake = [computer_pieces_negative.pop(abs(computer_command) - 1)] + domino_snake
                         computer_pieces.remove(computer_pieces[abs(computer_command) - 1])
                         break
-        
+
+      
         elif game_mod == 3:
             difficult_list = domino_snake.copy() + computer_pieces.copy()
             frequent_list = [0, 0, 0, 0, 0, 0, 0]
