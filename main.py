@@ -1,8 +1,10 @@
-class LessThanError(Exception):
+class NegativeSumError(Exception):
     def __str__(self):
-        return 'There is an error!'
+        return 'Sum is negative'
 
 
-x = 100
-if x < 101:
-    raise LessThanError
+a, b = int(input()), int(input())
+if a+b < 0:
+    raise NegativeSumError
+else:
+  print(a+b)
