@@ -1,14 +1,14 @@
-def sum_with_exceptions(a, b):
+def check_w_letter(a, b):
 
   class NegativeSumError(Exception):
     def __str__(self):
-      return 'Sum is negative'
+      return 'This is your Exception message!'
 
-  if a+b < 0:
+  if b in a:
     raise NegativeSumError
   else:
-    print(a+b)
+    print(a)
 
 
-a, b = int(input()), int(input())
-sum_with_exceptions(a, b)
+a, b = input(), input()
+check_w_letter(a, b)
