@@ -75,10 +75,10 @@ while True:
 while len(player_pieces) != 0 and len(computer_pieces) != 0 and status != 'draw' and status != 'computer_disable' and status != 'player_disable':
     print('==============================================================================================================')
     print('Stock size: %s\nComputer pieces: %s\n\n' % (len(stock_pieces), len(computer_pieces)))
-    #if len(domino_snake) > 7:
-    #    print(*domino_snake[:3], '...', *domino_snake[-3:])
-    #else:
-    print(*domino_snake)
+    if len(domino_snake) > 7:
+        print(*domino_snake[:3], '...', *domino_snake[-3:])
+    else:
+      print(*domino_snake)
     print('{}{}'.format('\n\n', 'Your pieces:'))
     for count, your_pieces in enumerate(player_pieces):
         print(count + 1, your_pieces, sep=':')
