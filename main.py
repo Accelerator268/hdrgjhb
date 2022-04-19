@@ -1,26 +1,29 @@
-def my_decor1(func):
-  def wrapper(argforfunc):
-    print('It is amazing see you here!')
-    return func(argforfunc)
-  return wrapper
+# def exampleexceptions1(x, y):
+#   if y == 0:
+#     raise ZeroDivisionError('the dem is 0')
+#   elif y < 0:
+#     raise Exception('the dom is neg')
+#   else:
+#     print(x / y)
+
+# exampleexceptions1(10, 5)
 
 
-@my_decor1
-def greet(name):
-  return f'Hello, {name}!!'
-
-print(greet('John'))
-
-# string decorator2
-
-def my_decor2(func):
-  def wrapper(*argsforfunc):
-    return ' '.join((func(*argsforfunc), 'RUB'))
-  return wrapper
+class OutOfBoundsException(Exception):
+    def _init_(self, x):
+      self.message = f'{x} can not be processed'
+      super()._init_(self.message)
 
 
-@my_decor2
-def calculate(a, b):
-  return str(a // b)
+def exampleexceptions4(x):
+    try:
+        if 3 < x < 30:
+            raise OutOfBoundsException(x)
+        else:
+            print(x)
+    except OutOfBoundsException as err:
+        print(err)
 
-print(calculate(1000, 25))
+
+
+exampleexceptions4(10)
