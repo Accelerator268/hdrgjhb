@@ -1,29 +1,27 @@
-# def exampleexceptions1(x, y):
-#   if y == 0:
-#     raise ZeroDivisionError('the dem is 0')
-#   elif y < 0:
-#     raise Exception('the dom is neg')
-#   else:
-#     print(x / y)
-
-# exampleexceptions1(10, 5)
+from string import digits
 
 
-class OutOfBoundsException(Exception):
-    def _init_(self, x):
-      self.message = f'{x} can not be processed'
-      super()._init_(self.message)
+class NotWordError(Exception):
+    def __init__(self, word):
+      self.word = word
+      self.massage = f'\"{word}\" is not a word, sorry!'
+      super().__init__(self.massage)
+    
 
 
-def exampleexceptions4(x):
-    try:
-        if 3 < x < 30:
-            raise OutOfBoundsException(x)
-        else:
-            print(x)
-    except OutOfBoundsException as err:
-        print(err)
+def check_word(word):
+  for i in range(len(word)):
+    if word[i] in digits:
+      raise NotWordError(word)
+  else:
+    return word
 
 
+def error_handling(word):
+  try:
+    return check_word(word)
+  except NotWordError:
+    return word
 
-exampleexceptions4(10)
+word = input()
+print(error_handling(word))
