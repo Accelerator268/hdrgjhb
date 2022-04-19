@@ -78,7 +78,7 @@ while len(player_pieces) != 0 and len(computer_pieces) != 0 and status != 'draw'
     if len(domino_snake) > 7:
         print(*domino_snake[:3], '...', *domino_snake[-3:])
     else:
-      print(*domino_snake)
+        print(*domino_snake)
     print('{}{}'.format('\n\n', 'Your pieces:'))
     for count, your_pieces in enumerate(player_pieces):
         print(count + 1, your_pieces, sep=':')
@@ -205,6 +205,7 @@ while len(player_pieces) != 0 and len(computer_pieces) != 0 and status != 'draw'
             if count == 7:
                 status = 'draw'
 
+print(*domino_snake)
 
 if len(computer_pieces) == 0:
     print('Status: The game is over. Computer won!')
