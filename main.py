@@ -1,14 +1,20 @@
-def check_w_letter(a, b):
-
-  class NegativeSumError(Exception):
+class NotInBoundsError(Exception):
     def __str__(self):
-      return 'This is your Exception message!'
+      return 'There is an error!'
 
-  if b in a:
-    raise NegativeSumError
+
+def check_integer(num):
+  if 45 < num < 67:
+    return num
   else:
-    print(a)
+    raise NotInBoundsError
 
 
-a, b = input(), input()
-check_w_letter(a, b)
+def error_handling(num):
+  try:
+    return check_integer(num)
+  except NotInBoundsError:
+    return 'There is an error!'
+
+num = 30
+print(error_handling(num))
