@@ -252,6 +252,8 @@ while len(player_pieces) != 0 and len(computer_pieces) != 0 and status != 'draw'
                             break
                         else:
                             print('Invalid input')
+                    elif stock_pieces == 0 and player_command == 0:
+                        status = 'player disabled'
                 else:
                     print('Invalid input')
 
@@ -267,9 +269,9 @@ while len(player_pieces) != 0 and len(computer_pieces) != 0 and status != 'draw'
 
 print(*domino_snake)
 
-if len(computer_pieces) == 0:
+if len(computer_pieces) == 0 or status == 'player disabled':
     print('\nStatus: The game is over. Computer won!')
-elif len(player_pieces) == 0:
+elif len(player_pieces) == 0 or status == 'computer disabled':
     print('\nStatus: The game is over. You won!')
 elif status == 'draw':
     print('\nStatus: The game is over. It\' a draw!')
