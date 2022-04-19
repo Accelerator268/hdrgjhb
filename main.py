@@ -61,7 +61,7 @@ for i in range(len(computer_pieces_negative)):
 
 while True:
     try:
-        game_mod = int(input('\nSelect game mod:\n1 - Easy\n2 - Normal\n'))
+        game_mod = int(input('\nSelect game mod:\n1 - Easy\n2 - Normal\n3 - Difficult\n'))
     except ValueError:
         print('Invalid input')
     else:
@@ -75,10 +75,10 @@ while True:
 while len(player_pieces) != 0 and len(computer_pieces) != 0 and status != 'draw' and status != 'computer_disable' and status != 'player_disable':
     print('==============================================================================================================')
     print('Stock size: %s\nComputer pieces: %s\n\n' % (len(stock_pieces), len(computer_pieces)))
-    #if len(domino_snake) > 7:
-    #    print(*domino_snake[:3], '...', *domino_snake[-3:])
-    #else:
-    print(*domino_snake)
+    if len(domino_snake) > 7:
+        print(*domino_snake[:3], '...', *domino_snake[-3:])
+    else:
+        print(*domino_snake)
     print('{}{}'.format('\n\n', 'Your pieces:'))
     for count, your_pieces in enumerate(player_pieces):
         print(count + 1, your_pieces, sep=':')
@@ -120,7 +120,7 @@ while len(player_pieces) != 0 and len(computer_pieces) != 0 and status != 'draw'
                         computer_pieces.remove(computer_pieces[abs(computer_command) - 1])
                         break
 
-        elif game_mod == 2:
+        elif game_mod == 3:
             difficult_list = domino_snake.copy() + computer_pieces.copy()
             frequent_list = [0, 0, 0, 0, 0, 0, 0]
             for i in difficult_list:
@@ -154,7 +154,67 @@ while len(player_pieces) != 0 and len(computer_pieces) != 0 and status != 'draw'
                     computer_pieces_negative.append(computer_pieces[-1][::-1])
                 else:
                     status = 'computer_disable'
-
+        elif game_mod == 2:
+            game_mod_normal = random.randint(1, 2)
+            if game_mod_normal == 1:
+                while True:
+                    computer_command = random.randint(-len(computer_pieces), len(computer_pieces))
+                    if computer_command == 0 and len(stock_pieces) != 0:
+                        computer_pieces.append(stock_pieces.pop(random.randint(0, len(stock_pieces) - 1)))
+                        computer_pieces_negative.append(computer_pieces[-1][::-1])
+                        break
+                    elif 1 <= computer_command <= len(computer_pieces):
+                        if domino_snake[-1][-1] == computer_pieces[computer_command - 1][0]:
+                            domino_snake.append(computer_pieces.pop(computer_command - 1))
+                            computer_pieces_negative.remove(computer_pieces_negative[computer_command - 1])
+                            break
+                        elif domino_snake[-1][-1] == computer_pieces_negative[computer_command - 1][0]:
+                            domino_snake.append(computer_pieces_negative.pop(computer_command - 1))
+                            computer_pieces.remove(computer_pieces[computer_command - 1])
+                            break
+                    elif -1 >= computer_command >= -len(computer_pieces):
+                        if domino_snake[0][0] == computer_pieces[abs(computer_command) - 1][1]:
+                            domino_snake = [computer_pieces.pop(abs(computer_command) - 1)] + domino_snake
+                            computer_pieces_negative.remove(computer_pieces_negative[abs(computer_command) - 1])
+                            break
+                        elif domino_snake[0][0] == computer_pieces_negative[abs(computer_command) - 1][1]:
+                            domino_snake = [computer_pieces_negative.pop(abs(computer_command) - 1)] + domino_snake
+                            computer_pieces.remove(computer_pieces[abs(computer_command) - 1])
+                            break
+            elif game_mod_normal == 2:
+                difficult_list = domino_snake.copy() + computer_pieces.copy()
+                frequent_list = [0, 0, 0, 0, 0, 0, 0]
+                for i in difficult_list:
+                    frequent_list[i[0]] += 1
+                    frequent_list[i[-1]] += 1
+                max_list = [0 for _ in range(len(computer_pieces))]
+                for i in range(len(computer_pieces)):
+                    max_list[i] = frequent_list[computer_pieces[i][0]] + frequent_list[computer_pieces[i][-1]]
+                for i in range(1, len(computer_pieces) + 1):
+                    computer_command = max_list.index(max(max_list)) + 1
+                    if domino_snake[-1][-1] == computer_pieces[computer_command - 1][0]:
+                        domino_snake.append(computer_pieces.pop(computer_command - 1))
+                        computer_pieces_negative.remove(computer_pieces_negative[computer_command - 1])
+                        break
+                    elif domino_snake[-1][-1] == computer_pieces_negative[computer_command - 1][0]:
+                        domino_snake.append(computer_pieces_negative.pop(computer_command - 1))
+                        computer_pieces.remove(computer_pieces[computer_command - 1])
+                        break
+                    elif domino_snake[0][0] == computer_pieces[abs(computer_command) - 1][1]:
+                        domino_snake = [computer_pieces.pop(abs(computer_command) - 1)] + domino_snake
+                        computer_pieces_negative.remove(computer_pieces_negative[abs(computer_command) - 1])
+                        break
+                    elif domino_snake[0][0] == computer_pieces_negative[abs(computer_command) - 1][1]:
+                        domino_snake = [computer_pieces_negative.pop(abs(computer_command) - 1)] + domino_snake
+                        computer_pieces.remove(computer_pieces[abs(computer_command) - 1])
+                        break
+                    max_list[i - 1] = 0
+                else:
+                    if stock_pieces != 0:
+                        computer_pieces.append(stock_pieces.pop(random.randint(0, len(stock_pieces) - 1)))
+                        computer_pieces_negative.append(computer_pieces[-1][::-1])
+                    else:
+                        status = 'computer_disable'
 
     elif status == 'player':
         print('\nStatus: It\'s your turn to make a move. Enter your command.\n')
@@ -205,10 +265,11 @@ while len(player_pieces) != 0 and len(computer_pieces) != 0 and status != 'draw'
             if count == 7:
                 status = 'draw'
 
+print(*domino_snake)
 
 if len(computer_pieces) == 0:
-    print('Status: The game is over. Computer won!')
+    print('\nStatus: The game is over. Computer won!')
 elif len(player_pieces) == 0:
-    print('Status: The game is over. You won!')
+    print('\nStatus: The game is over. You won!')
 elif status == 'draw':
-    print('Status: The game is over. It\' a draw!')
+    print('\nStatus: The game is over. It\' a draw!')
