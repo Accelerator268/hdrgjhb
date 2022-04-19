@@ -1,20 +1,26 @@
-class NotInBoundsError(Exception):
-    def __str__(self):
-      return 'There is an error!'
+def my_decor1(func):
+  def wrapper(argforfunc):
+    print('It is amazing see you here!')
+    return func(argforfunc)
+  return wrapper
 
 
-def check_integer(num):
-  if 45 < num < 67:
-    return num
-  else:
-    raise NotInBoundsError
+@my_decor1
+def greet(name):
+  return f'Hello, {name}!!'
+
+print(greet('John'))
+
+# string decorator2
+
+def my_decor2(func):
+  def wrapper(*argsforfunc):
+    return ' '.join((func(*argsforfunc), 'RUB'))
+  return wrapper
 
 
-def error_handling(num):
-  try:
-    return check_integer(num)
-  except NotInBoundsError:
-    return 'There is an error!'
+@my_decor2
+def calculate(a, b):
+  return str(a // b)
 
-num = 30
-print(error_handling(num))
+print(calculate(1000, 25))
