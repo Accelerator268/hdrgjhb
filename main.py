@@ -1,36 +1,25 @@
-# generators
-
-def multiples(a, n):
-  i = 1
-  result = []
-  while i <= n:
-    result.append(a * i)
-    i += 1
-  return result  # list
+from string import digits
 
 
-print(multiples(3, 5))  # gives whole list
-print(multiples(2, 10))  # # gives whole list
+class NotWordError(Exception):
+    def __init__(self, word):
+        self.message = f'%s is not a word, sorry!' % word
+        super().__init__(self.message)
 
 
-def multiples(a, n):
-  i = 1
-  while i <= n:
-    yield a * i  # yield is used instead of return to make results one by one
-    i += 1
-
-my_gen = multiples(3, 5)  # generator object
-print(next(my_gen))  # gives 1st result
-print(next(my_gen))  # gives 2nd result
-print(next(my_gen))  # gives 3d result
+def check_word(word):
+    for i in range(len(word)):
+        if word[i] in digits:
+            raise NotWordError(word)  # raise only once!!!
+    return word
 
 
-numbers = [1, 2, 3]
-my_generator = (n ** 2 for n in numbers)  # generator object
-print(next(my_generator))  # gives 1st result
-print(next(my_generator))  # gives 2nd result
-print(next(my_generator))  # gives 3d result
-print(next(my_generator))  # StopIteration Exception
+def error_handling(word):
+    try:
+        print(check_word(word))   # print positive
+    except NotWordError as err:
+        print(err)                # print negative not raise again :)))
 
-for n in my_generator:  # can be used with for loop
-  print(n)
+
+word = input()
+error_handling(word)
