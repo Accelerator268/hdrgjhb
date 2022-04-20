@@ -1,27 +1,21 @@
-from string import digits
+import socket
 
 
-class NotWordError(Exception):
-    def __init__(self, word):
-      self.word = word
-      self.massage = f'\"{word}\" is not a word, sorry!'
-      super().__init__(self.massage)
-    
+with socket.socket() as client_socket:
 
+  hostname = '127.0.0.1'  # str
+  port = 5000  # int
 
-def check_word(word):
-  for i in range(len(word)):
-    if word[i] in digits:
-      raise NotWordError(word)
-  else:
-    return word
+  address = (hostname, port)
+  
+  client_socket.connect(address)  # one arg!!
+  
+  data = 'This is my test string'
+  
+  client_socket.send(data.encode())  # converting to bytes
+  
+  buffer = 1024  # response limit
+  response = client_socket.recv(buffer)
+  response = response.decode()  # converting back to rea
 
-
-def error_handling(word):
-  try:
-    return check_word(word)
-  except NotWordError:
-    return word
-
-word = input()
-print(error_handling(word))
+  print(response)
