@@ -1,38 +1,23 @@
-import itertools
+# READ
 
-lst1, lst2, lst3 = [1, 2], [3, 4], [5, 6]
+# with open('passwords.txt', 'r', encoding='utf-8') as file:
+#   print(file.read(4)) #  read 4 bytes
+#   print(file.read())  #  read all/rest of bytes in fileif read before like above
 
-# chain
+# with open('passwords.txt', 'r', encoding='utf-8') as file:
+#   print(file.readline(5)) #  read 5 bytes
+#   print(file.readline())  #  read all/rest of bytes in line if read before like above
 
-for num in itertools.chain(lst1, lst2, lst3):  # saves memory no obj created
-  print(num)
-
-# product
-
-greets = ['Hi', 'Bye', 'Pls leave']
-names = ['Anton', 'Greg']
-
-for greet, name in itertools.product(greets, names):
-  print(greet, name)
-
-# product with repeat
+# with open('passwords.txt', 'r', encoding='utf-8') as file:
+#   print(file.readlines()) #  returns list
   
-chars = 'abcd1!'
-low, high = (1, 4)
-
-my_gen = (opt for i in range(low, high + 1) for opt in itertools.product(chars, repeat=i))
- 
-for opt in my_gen:
-  print(''.join(opt))
+# with open('passwords.txt', 'r', encoding='utf-8') as file:
+#   for line in file:
+#     print(line) #  returns line + \n
+#     print(line.strip()) #  returns line
 
 
-# combinations
-
-presents = ['p1', 'p2', 'p3', 'p4']
-
-n = 3  # how many you can take from list of anything
-
-my_gen = itertools.combinations(presents, 3)
-
-for opt in my_gen:
-  print('-'.join(opt))
+#WRITE
+with open('checked.txt', 'w', encoding='utf-8') as file:
+  file.write('new entry - check')
+  file.write('NEW new entry - check')  # re-write the line above
